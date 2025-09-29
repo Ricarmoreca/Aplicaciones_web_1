@@ -1,0 +1,55 @@
+body {
+color: #000000; background-color: #DDEDED; font-family: 'Times New Roman', Times, serif, Cambria, serif; font-size: 16px;
+}
+
+h1 {
+color: #3498DB; font-family: 'Times New Roman', Times, serif, 'Times New Roman', Times, serif, sans-serif; font-size: 32px;
+}
+
+h2 {
+color: #3498DB; font-family: 'Times New Roman', Times, serif, 'Times New Roman', Times, serif, sans-serif; font-size: 25px;
+}
+
+.Imagen {
+    position: relative;
+}
+
+.Foto {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+     margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.seccion {
+     display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.linea-vertical {
+    width: 4px;
+    background-color: #3498DB;
+    border-radius: 2px;
+    margin: 0 10px;
+    align-self: stretch;
+    position: relative;
+    top: 0;
+}
+
+.seccion > .linea-vertical {
+    margin-top: 0;
+}
+
+.columna-izquierda, .columna-derecha {
+    flex: 1;
+}
+
+strong {
+font-size: 20px;
+}
