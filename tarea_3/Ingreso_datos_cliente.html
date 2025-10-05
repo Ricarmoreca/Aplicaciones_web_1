@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Ingreso de datos del cliente</title>
+<h1>Ingrese datos del cliente</h1>
+<link href ="estilo.css" rel="stylesheet"/>
+</head>
+<body>
+    <form  id="formulario" action="Ingreso_datos_cliente.html" method="post">
+        <label for="nombres">Nombres:</label><br>
+        <input type="text" id="nombres" name="nombres" required><br>
+
+        <label for="apellidos">Apellidos:</label><br>
+        <input type="text" id="apellidos" name="apellidos" required><br>
+
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label><br>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+
+        <label for="cedula">Cédula:</label><br>
+        <input type="text" id="cedula" name="cedula" required><br>
+
+        <label for="telefono">Teléfono:</label><br>
+        <input type="text" id="telefono" name="telefono" required><br>
+
+        <label for="correo">Correo Electrónico:</label><br>
+        <input type="text" id="correo" name="correo" required><br>
+
+        <label for="direccion">Dirreción:</label><br>
+        <input type="text" id="direccion" name="direccion" required><br>
+
+        <label for="genero">Género:</label><br>
+        <input type="radio"  name="genero" value="hombre" checked="checked">Hombre<br>
+        <input type="radio"  name="genero" value="mujer">Mujer<br>
+
+        <input type="submit" name ="enviar" value="Enviar">
+        <input type="reset" name="borrar" value="Borrar datos introducidos">
+
+        <script>
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            var campos = ['nombres', 'apellidos', 'fecha_nacimiento', 'cedula', 'telefono', 'correo', 'direccion'];
+            var vacio = false;
+            campos.forEach(function(id) {
+                var valor = document.getElementById(id).value.trim();
+                if (valor === '') {
+                    vacio = true;
+                }
+            });
+            if (vacio) {
+                alert('Por favor, complete todos los campos.');
+                event.preventDefault();
+                return;
+            }
+
+            var correo = document.getElementById('correo').value;
+            var correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+            if (!correoValido) {
+                alert('Por favor, ingrese un correo electrónico válido.');
+                event.preventDefault();
+                return;
+            }
+
+            var cedula = document.getElementById('cedula').value.trim();
+            var telefono = document.getElementById('telefono').value.trim();
+            if (!/^\d+$/.test(cedula)) {
+                alert('La cédula solo debe contener números.');
+                event.preventDefault();        
+                return;
+            }
+            if (!/^\d+$/.test(telefono)) {
+                alert('El teléfono solo debe contener números.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!confirm('¿Está seguro de enviar los datos?')) {
+                event.preventDefault();
+            }
+            });
+        </script>
+    </form>
+</body>
+</html>

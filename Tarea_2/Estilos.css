@@ -18,13 +18,13 @@ color: #3498DB; font-family: 'Times New Roman', Times, serif, 'Times New Roman',
     display: flex;
     justify-content: left;
     align-items: left;
-     margin-bottom: 0;
+    margin-bottom: 0;
     position: relative;
     z-index: 2;
 }
 
 .seccion {
-     display: flex;
+    display: flex;
     gap: 20px;
     align-items: stretch;
     margin-top: 0;
