@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Panel Principal | Publicaciones ULEAM</title>
+<link href="dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor">
+        <nav class="Menú_lateral">
+            <h2>Panel ULEAM</h2>
+            <a href="Publicaciones.html"> Publicaciones</a>
+            <a href="Revision_publicaciones.html"> Revisar publicaciones</a>
+            <a href="Consulta.html"> Consultar publicaciones</a>
+            <a href="#" id="logout"> Cerrar sesión</a>
+        </nav>
+    </div>
+    <section class="resumen">
+        <div class="tarjeta">
+          <h3>Publicaciones Totales</h3>
+          <p id="totalCount">0</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Aprobadas</h3>
+          <p id="aprobadasCount">0</p>
+        </div>
+        <div class="tarjeta">
+          <h3>En Revisión</h3>
+          <p id="revisionCount">0</p>
+        </div>
+    </section>
+    <section class="crear_publicacion">
+        <div class="boton_crear">
+            <a href="registro_publicacion.html" class="btn-crear">Crear publicación</a>
+        </div>
+    </section>
+
+    <script>
+    (function () {
+        function updateCounts() {
+            const publications = JSON.parse(localStorage.getItem('publications') || '[]');
+
+            const total = publications.length;
+            const aprobadas = publications.filter(p => {
+                const s = (p.status || '').toString().toLowerCase();
+                return s === 'aprobada' || s === 'aprobado' || s === 'approved';
+            }).length;
+
+            const enRevision = publications.filter(p => {
+                const s = (p.status || '').toString().toLowerCase();
+                return s.includes('revision') || s === 'en_revision' || s === 'en revisión' || s === 'pending' || s === 'pendiente';
+            }).length;
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('aprobadasCount').textContent = aprobadas;
+            document.getElementById('revisionCount').textContent = enRevision;
+        }
+
+        updateCounts();
+
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'publications') updateCounts();
+        });
+
+        var logoutBtn = document.getElementById('logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                localStorage.removeItem('session');
+                window.location.replace('Inicio_sesion.html');
+        });
+    }
+
+        window.__updatePublicationCounts = updateCounts;
+    })();
+    </script>
+</body>
+</html>

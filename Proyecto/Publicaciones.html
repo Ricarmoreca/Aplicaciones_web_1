@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Publicaciones</title>
+<link href="Publicaciones.css" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Publicaciones</h1>
+        <div id="userInfo" class="small"></div>
+      </div>
+      <div>
+        <div class="counts" id="counts"></div>
+        <button id="btnCrear">Crear publicación</button>
+        <a href="#" id="logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+    <div id="pubList" class="grid"></div>
+    <div id="noData" class="no-data" style="display:none">No hay publicaciones registradas.</div>
+  </div>
+
+  <script>
+(function(){
+  function escapeHTML(s){ 
+    return String(s||'')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+  }
+
+  var pubList = document.getElementById('pubList');
+  var countsEl = document.getElementById('counts');
+  var btnCrear = document.getElementById('btnCrear');
+  var userInfo = document.getElementById('userInfo');
+  var noData = document.getElementById('noData');
+  var btnLogout = document.getElementById('logout');
+
+  function loadPublications(){ 
+    return JSON.parse(localStorage.getItem('publications') || '[]'); 
+  }
+  function savePublications(pubs){ 
+    localStorage.setItem('publications', JSON.stringify(pubs));
+  }
+  function loadSession(){ 
+    return JSON.parse(localStorage.getItem('session') || 'null'); 
+  }
+
+  function render(){
+    var pubs = loadPublications();
+    var session = loadSession();
+
+    var total = pubs.length;
+    var aprobadas = pubs.filter(p => (p.status||'').toLowerCase() === 'aprobada').length;
+    var revision = pubs.filter(p => (p.status||'').toLowerCase() === 'en_revision').length;
+    countsEl.textContent = `Totales: ${total} • Aprobadas: ${aprobadas} • En revisión: ${revision}`;
+
+    if (!session){
+      userInfo.textContent = 'No hay sesión iniciada.';
+      btnCrear.style.display = 'none';
+    } else {
+      userInfo.textContent = session.name || session.email || '';
+      var role = (session.rol || '').toString().toLowerCase();
+      if (role === 'docente' || role === 'administrador' || role === 'admin') {
+        btnCrear.style.display = 'inline-block';
+      } else {
+        btnCrear.style.display = 'none';
+      }
+    }
+
+    // 🧩 Filtro de publicaciones por rol
+    var role = (session?.rol || '').toLowerCase();
+    var userEmail = (session?.email || '').toLowerCase();
+
+    if (role === 'docente' || role === 'estudiante') {
+      // Docente y estudiante: solo publicaciones aprobadas
+      pubs = pubs.filter(p => (p.status || '').toLowerCase() === 'aprobada');
+    } else if (role === 'administrador' || role === 'admin') {
+      // Admin: ve todo
+      pubs = pubs;
+    } else {
+      // Otros roles o sin rol válido: no ven nada
+      pubs = [];
+    }
+
+    if (!pubs.length){
+      pubList.innerHTML = '';
+      noData.style.display = '';
+      return;
+    }
+    noData.style.display = 'none';
+
+    pubList.innerHTML = pubs.map(function(pub){
+      var doiLink = pub.doi ? `<a href="${escapeHTML(pub.doi)}" target="_blank">DOI/Enlace</a>` : '';
+      var pdfLink = pub.pdfData ? `<a href="${escapeHTML(pub.pdfData)}" download="${escapeHTML((pub.title||'publicacion').replace(/[^a-z0-9\-]/gi,'_'))}.pdf">PDF</a>` : '';
+      var createdBy = escapeHTML(pub.createdByName || pub.createdBy || 'Anónimo');
+
+      // Mostrar botón eliminar solo si:
+      // - el rol es admin, o
+      // - el docente actual creó la publicación
+      var canDelete = false;
+      if (role === 'administrador' || role === 'admin') canDelete = true;
+      else if (role === 'docente' && pub.createdBy?.toLowerCase() === userEmail) canDelete = true;
+
+      var deleteBtn = canDelete 
+        ? `<button class="btnEliminar" data-id="${escapeHTML(pub.id)}">🗑️ Eliminar</button>`
+        : '';
+
+      return `
+        <article class="pub" data-id="${escapeHTML(pub.id)}">
+          <h3>${escapeHTML(pub.title)}</h3>
+          <div class="meta">
+            <strong>Autores:</strong> ${escapeHTML(pub.authors)} • 
+            <strong>Tipo:</strong> ${escapeHTML(pub.type || '')} • 
+            <strong>Año:</strong> ${escapeHTML((pub.date || '').slice(0,4))}
+          </div>
+          <div class="meta">
+            <strong>Estado:</strong> ${escapeHTML(pub.status || '')} • 
+            <strong>Creado por:</strong> ${createdBy}
+          </div>
+          <div class="links">
+            ${doiLink}${(doiLink && pdfLink ? ' ' : '')}${pdfLink}
+            ${deleteBtn}
+          </div>
+        </article>`;
+    }).join('');
+
+    // Asignar eventos de eliminar
+    document.querySelectorAll('.btnEliminar').forEach(btn => {
+      btn.addEventListener('click', function(){
+        var id = this.dataset.id;
+        if (!confirm('¿Deseas eliminar esta publicación?')) return;
+        var allPubs = loadPublications().filter(p => p.id != id);
+        savePublications(allPubs);
+        render();
+        alert('✅ Publicación eliminada correctamente.');
+      });
+    });
+  }
+
+  btnCrear.addEventListener('click', function(){ 
+    window.location.href = 'Registro_publicacion.html'; 
+  });
+
+  btnLogout.addEventListener('click', function(e){
+    e.preventDefault();
+    if (!confirm('¿Desea cerrar sesión?')) return;
+    localStorage.removeItem('session');
+    window.location.href = 'Inicio_sesion.html';
+  });
+
+  render();
+
+  window.addEventListener('storage', function(e){
+    if (e.key === 'publications' || e.key === 'session' || e.key === null) render();
+  });
+  window.addEventListener('resize', render);
+})();
+</script>
+</body>
+</html>
