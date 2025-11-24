@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Olvidó su contraseña</title>
+<link href="Recuperar_contraseña.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="recuperar-wrapper">
+    <div class="recuperar-left">
+      <h1>¿Olvidó su contraseña?</h1>
+      <p>Ingrese su correo institucional para recibir instrucciones de restablecimiento. </p>
+    </div>
+
+    <form id="form-olvido" class="recuperar-card" action="#" method="post">
+        <label for="email">Correo institucional:</label><br>
+        <input type="email" id="email" name="email" required placeholder="usuario@institucion.edu"><br>
+
+        <input type="submit" value="Enviar enlace de restablecimiento">
+        <span class="small">Si no recibe el correo, revise su carpeta de spam.</span>
+
+        <a href="Inicio_sesion.html">Volver a iniciar sesión</a>
+    </form>
+  </div>
+
+  <script>
+  document.getElementById('form-olvido').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var email = document.getElementById('email').value.trim();
+
+      if (email === '') {
+          alert('Por favor, ingrese su correo institucional.');
+          return;
+      }
+
+      // Validación básica de formato de correo
+      var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailValido) {
+          alert('Por favor, ingrese un correo electrónico válido.');
+          return;
+      }
+
+      // Confirmación antes de "enviar" (simulado)
+      if (!confirm('Se enviará un enlace de restablecimiento a: ' + email + '. ¿Desea continuar?')) {
+          return;
+      }
+
+      // Simular envío: mostrar mensaje y volver a inicio de sesión
+      alert('Si el correo existe en nuestro sistema, recibirá un enlace para restablecer la contraseña en breve.');
+      window.location.href = 'Inicio_sesion.html';
+  });
+  </script>
+</body>
+</html>

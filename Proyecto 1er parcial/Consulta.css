@@ -1,0 +1,122 @@
+:root{
+  --uleam-blue: #ef3037;
+  --uleam-light: #EAF3FB;
+  --uleam-gold: #F0C419;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --card-bg: #ffffff;
+  --border: #e6eef8;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:18px;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  color:var(--text);
+  background: linear-gradient(180deg,#fbfdff 0%,var(--uleam-light) 100%);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Contenedor y encabezado */
+h1{
+  text-align:left;
+  color:var(--uleam-blue);
+  margin:6px 0 14px;
+  font-size:1.6rem;
+}
+.controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.controls input[type="text"],
+.controls select{
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--card-bg);
+  min-width:180px;
+  box-shadow:0 2px 6px rgba(30,79,138,0.03);
+  font-size:0.95rem;
+}
+.controls input[type="text"]{
+  flex:1 1 280px;
+}
+.controls button{
+  background:var(--uleam-blue);
+  color:#fff;
+  border:0;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 6px 18px rgba(30,79,138,0.08);
+}
+.controls button:hover{opacity:0.95}
+
+/* contadores */
+.small#counts, .small{
+  color:var(--muted);
+  font-size:0.9rem;
+  margin-bottom:8px;
+}
+
+/* resultados - tabla */
+#results{margin-top:8px}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--card-bg);
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(30,79,138,0.04);
+}
+th, td{
+  padding:12px 10px;
+  border-bottom:1px solid #f1f6fb;
+  text-align:left;
+  font-size:0.95rem;
+}
+thead th{
+  background:linear-gradient(90deg, rgba(30,79,138,0.06), rgba(30,79,138,0.03));
+  color:var(--uleam-blue);
+  font-weight:700;
+  font-size:0.95rem;
+}
+tbody tr:hover{background:#fbfdff}
+
+/* enlaces DOI / PDF */
+.links a{
+  color:var(--uleam-blue);
+  text-decoration:none;
+  margin-right:8px;
+  font-weight:600;
+}
+.links a:hover{text-decoration:underline}
+
+/* tarjetas (mobile) */
+#resultsCards{display:none}
+.card{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:10px;
+  background:var(--card-bg);
+  box-shadow:0 6px 18px rgba(30,79,138,0.03);
+}
+.card h3{margin:0 0 6px;color:var(--uleam-blue);font-size:1.05rem}
+.card .small{color:var(--muted);margin-bottom:6px}
+
+/* mensaje sin datos */
+.no-data{color:var(--muted);padding:18px;text-align:center}
+
+/* responsive */
+@media (max-width:760px){
+  body{margin:12px}
+  table{display:none}
+  #resultsCards{display:block}
+  .controls input[type="text"]{flex-basis:100%; order:1}
+  .controls select, .controls button{flex-basis:48%}
+}

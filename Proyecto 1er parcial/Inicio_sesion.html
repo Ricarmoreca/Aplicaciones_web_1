@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Inicio de sesión</title>
+<link href ="Inicio_sesion.css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>INICIAR SESIÓN</h1>
+
+    <form id="formulario" action="#" method="post">
+        <div class="campos_inicio_sesion">
+            <label for="correo">Correo Institucional:</label><br>
+            <input type="email" id="correo" name="correo" required><br>
+
+            <label for="contraseña">Contraseña:</label><br>
+            <input type="password" id="contraseña" name="contraseña" required><br>
+        </div>
+
+        <div class="acciones_inicio_sesion">
+            <input type="submit" name="enviar" value="Iniciar sesión">
+        </div>
+
+        <div class="links_inicio_sesion">
+            <a href="Recuperar_contraseña.html">¿Olvidó su contraseña?</a><br>
+            <a href="Registro_usuario.html">¿No tienes una cuenta? Regístrate aquí</a><br><br>
+        </div>
+    </form>
+
+    <script>
+async function hashSHA256(text) {
+  const enc = new TextEncoder();
+  const data = enc.encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+(async function () {
+  // asegurar existencia de admin (crea si no existe) — útil para pruebas
+  async function ensureAdmin() {
+    var users = JSON.parse(localStorage.getItem('users') || '[]');
+    var adminEmail = 'admin@uleam.edu.ec';
+    if (!users.find(u => (u.email || '').toLowerCase() === adminEmail)) {
+      var adminPass = 'Admin1234!';
+      var passHash = await hashSHA256(adminPass);
+      users.push({ email: adminEmail, name: 'Administrador', rol: 'administrativo', passwordHash: passHash });
+      localStorage.setItem('users', JSON.stringify(users));
+      console.info('Usuario administrador creado:', adminEmail, '/', adminPass);
+    }
+  }
+  await ensureAdmin();
+
+  var form = document.getElementById('formulario');
+  if (!form) return;
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var emailEl = document.getElementById('correo') || document.querySelector('input[name="correo"]');
+    // soporte para id con tilde: buscar por id y por name
+    var passEl = document.getElementById('contraseña') || document.getElementById('contrasena') || document.querySelector('input[name="contraseña"]') || document.querySelector('input[name="contrasena"]');
+
+    var correoVal = (emailEl && emailEl.value || '').trim().toLowerCase();
+    var passVal = (passEl && passEl.value || '').trim();
+
+    if (!correoVal || !passVal) {
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
+
+    // aceptar dominios uleam (con o sin "live.")
+    var uleamRe = /@(?:live\.)?uleam\.edu\.ec$/i;
+    if (!uleamRe.test(correoVal)) {
+      // si quieres permitir otros correos para pruebas, comenta la siguiente línea
+      alert('Ingrese su correo institucional ULEAM (ej: usuario@uleam.edu.ec o usuario@live.uleam.edu.ec).');
+      emailEl.focus();
+      return;
+    }
+
+    var users = JSON.parse(localStorage.getItem('users') || '[]');
+    console.log('Usuarios en storage:', users);
+
+    var user = users.find(function(u){ return (u.email || '').toLowerCase() === correoVal; });
+    console.log('Usuario encontrado:', user);
+
+    if (!user) {
+      alert('Usuario o contraseña incorrectos.');
+      return;
+    }
+
+    var passHash = await hashSHA256(passVal);
+    console.log('Hash ingresado:', passHash, 'Hash almacenado:', user.passwordHash);
+    if (passHash !== user.passwordHash) {
+      alert('Usuario o contraseña incorrectos.');
+      return;
+    }
+
+    // crear sesión y redirigir según rol
+    localStorage.setItem('session', JSON.stringify({ email: user.email, name: user.name, rol: user.rol }));
+    var role = (user.rol || '').toString().toLowerCase();
+    if (role === 'administrativo' || role === 'administrador' || role === 'admin') {
+      window.location.href = 'Dashboard.html';
+    } else {
+      window.location.href = 'Publicaciones.html';
+    }
+  });
+})();
+</script>
+</body>
+</html>

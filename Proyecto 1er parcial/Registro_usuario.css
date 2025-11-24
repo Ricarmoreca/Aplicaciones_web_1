@@ -1,0 +1,132 @@
+:root{
+  --uleam-blue:#8f8d8a;
+  --uleam-light:#EAF3FB;
+  --uleam-gold:#3d3e3e;
+  --text:#1f2933;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --border:#e6eef8;
+  --shadow: rgba(30,79,138,0.06);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column; /* asegurar apilado vertical: título encima del formulario */
+  align-items:center;
+  justify-content:center;
+  font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg,#fbfdff 0%,var(--uleam-light) 100%);
+  color:var(--text);
+  padding:20px;
+  gap:18px;
+}
+
+/* Centrar y limitar ancho general */
+.page-wrapper{
+  width:100%;
+  max-width:420px;
+  padding:0 12px;
+  margin:0 auto;
+}
+
+/* Título principal (centrado y separado del formulario) */
+h1{
+  margin:0 0 6px;
+  font-size:1.25rem;
+  color:var(--uleam-blue);
+  text-align:center;
+  display:block;
+}
+
+/* Contenedor del formulario */
+form#formulario{
+  width:100%;
+  max-width:420px;    /* impedir que el formulario sea demasiado ancho */
+  margin:0 auto;      /* centrar */
+  padding:18px;       /* reducir un poco el padding para que no parezca tan grande */
+  box-shadow:0 10px 30px #1e4f8a0d;
+}
+
+/* Campos */
+.campos_registro{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:14px;
+}
+label{
+  font-size:0.92rem;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* Inputs y select */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #dbeaf9;
+  border-radius:8px;
+  background:#fff;
+  font-size:0.95rem;
+  color:var(--text);
+  outline:none;
+  transition:box-shadow .12s, border-color .12s, transform .06s;
+}
+input:focus, select:focus{
+  border-color:var(--uleam-blue);
+  box-shadow:0 8px 22px rgba(30,79,138,0.06);
+  transform:translateY(-1px);
+}
+
+/* Mejora visual del select (placeholder visible) */
+select:invalid { color: var(--muted); }
+select option[value=""] { color: #999; }
+
+/* Acciones (botón registrar) */
+.acciones_registro{
+  display:flex;
+  justify-content:center;
+  margin-top:8px;
+}
+.acciones_registro input[type="submit"]{
+  background:var(--uleam-gold);
+  color:#ffffff;
+  border:0;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(240,196,25,0.10);
+  transition:transform .12s, box-shadow .12s;
+}
+.acciones_registro input[type="submit"]:hover{ transform:translateY(-2px); }
+
+/* Links y ayuda */
+.links_registro{
+  margin-top:12px;
+  text-align:center;
+  font-size:0.95rem;
+  color:var(--muted);
+}
+.links_registro a{
+  color:var(--uleam-blue);
+  text-decoration:none;
+  font-weight:600;
+}
+.links_registro a:hover{ text-decoration:underline; }
+
+/* Mensajes y validación */
+.small{color:var(--muted);font-size:0.9rem}
+.form-error{color:#b00020;font-weight:600}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width:420px){
+  .page-wrapper{padding:10px}
+  form#formulario{padding:14px}
+}

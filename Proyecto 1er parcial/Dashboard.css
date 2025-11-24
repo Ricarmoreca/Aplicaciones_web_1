@@ -1,0 +1,130 @@
+:root{
+  --uleam-blue:#ef3037;
+  --uleam-light:#EAF3FB;
+  --uleam-gold:#F0C419;
+  --text:#1f2933;
+  --muted:#6b7280;
+  --card-bg:#ffffff;
+  --border:#e6eef8;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg,#fbfdff 0%,var(--uleam-light) 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* contenedor principal */
+.contenedor{
+  display:flex;
+  gap:20px;
+  max-width:1200px;
+  margin:24px auto;
+  padding:18px;
+}
+
+/* barra lateral */
+nav.Menú_lateral{
+  width:260px;
+  background:linear-gradient(180deg,rgb(239, 48, 55),rgb(239, 48, 55));
+  color:#fff;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(30,79,138,0.08);
+}
+nav.Menú_lateral h2{
+  margin:0 0 14px;
+  font-size:20px;
+  color:var(--uleam-gold);
+  letter-spacing:0.2px;
+}
+nav.Menú_lateral ul{list-style:none;padding:0;margin:0}
+nav.Menú_lateral li{margin:10px 0}
+nav.Menú_lateral a{
+  color:#fff;
+  text-decoration:none;
+  display:block;
+  padding:8px 10px;
+  border-radius:8px;
+  transition:background .12s, transform .08s;
+}
+nav.Menú_lateral a:hover{
+  background:rgba(255,255,255,0.06);
+  transform:translateX(4px);
+}
+
+/* sección principal (resumen + acciones) */
+section.resumen, section.crear_publicacion{
+  flex:1;
+  background:transparent;
+}
+
+/* tarjetas resumen */
+.resumen{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.tarjeta{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  flex:1;
+  min-width:200px;
+  box-shadow:0 8px 22px rgba(16,24,40,0.04);
+}
+.tarjeta h3{
+  margin:0 0 8px;
+  color:var(--uleam-blue);
+  font-size:1rem;
+}
+.tarjeta p{
+  margin:0;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--text);
+}
+
+/* botón crear publicación */
+.boton_crear{margin-top:6px}
+.btn-crear{
+  display:inline-block;
+  padding:10px 14px;
+  background:var(--uleam-gold);
+  color:#13222b;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:700;
+  box-shadow:0 8px 18px rgba(240,196,25,0.12);
+  transition:transform .12s, box-shadow .12s;
+}
+.btn-crear:hover{transform:translateY(-3px); box-shadow:0 14px 30px rgba(240,196,25,0.14);}
+
+/* logout link en menú lateral */
+#logout{
+  color:#fff;
+  display:block;
+  padding:8px 10px;
+  border-radius:8px;
+}
+#logout:hover{background:rgba(255,255,255,0.06);}
+
+/* detalles responsivos */
+@media (max-width:900px){
+  .contenedor{flex-direction:column;padding:12px}
+  nav.Menú_lateral{width:100%;display:flex;justify-content:space-between;align-items:center}
+  nav.Menú_lateral ul{display:flex;gap:8px}
+  nav.Menú_lateral li{margin:0}
+  .resumen{flex-direction:column}
+  .tarjeta{min-width:unset}
+}
+
+/* utilidades pequeñas */
+.small{color:var(--muted);font-size:0.9rem}
+.hidden{display:none}

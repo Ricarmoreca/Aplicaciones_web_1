@@ -1,0 +1,130 @@
+:root{
+  --uleam-blue:#1E4F8A;
+  --uleam-light:#EAF3FB;
+  --uleam-gold:#F0C419;
+  --text:#1f2933;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --border:#e6eef8;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg,#fbfdff 0%,var(--uleam-light) 100%);
+  color:var(--text);
+  padding:20px;
+}
+
+/* contenedor central */
+form#form-olvido, .recuperar-card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:26px;
+  box-shadow:0 12px 36px rgba(30,79,138,0.06);
+}
+
+/* encabezado y texto */
+h1{
+  margin:0 0 8px;
+  font-size:1.25rem;
+  color:var(--uleam-blue);
+  text-align:center;
+}
+p{margin:8px 0 16px;color:var(--muted);text-align:center;font-size:0.95rem}
+
+/* campos */
+label{display:block;margin-bottom:6px;color:var(--muted);font-size:0.92rem}
+input[type="email"]{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #dbeaf9;
+  border-radius:8px;
+  font-size:0.95rem;
+  outline:none;
+  transition:box-shadow .12s, border-color .12s;
+}
+input[type="email"]:focus{
+  border-color:var(--uleam-blue);
+  box-shadow:0 8px 22px rgba(30,79,138,0.06);
+}
+
+/* botón */
+input[type="submit"]{
+  display:block;
+  width:100%;
+  margin-top:14px;
+  background:var(--uleam-gold);
+  color:#082026;
+  border:0;
+  padding:10px 12px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(240,196,25,0.10);
+  transition:transform .12s, box-shadow .12s, opacity .12s;
+}
+input[type="submit"]:hover{transform:translateY(-2px)}
+input[type="submit"]:active{transform:translateY(0)}
+input[type="submit"]:disabled{opacity:0.6;cursor:not-allowed}
+
+/* enlaces y pie */
+form#form-olvido p a, .recuperar-footer a{
+  color:var(--uleam-blue);
+  text-decoration:none;
+  font-weight:600;
+}
+form#form-olvido p a:hover, .recuperar-footer a:hover{text-decoration:underline}
+
+/* mensaje pequeño */
+.small{display:block;margin-top:10px;text-align:center;color:var(--muted);font-size:0.9rem}
+
+/* responsive */
+@media (max-width:480px){
+  form#form-olvido{padding:18px;border-radius:10px}
+  h1{font-size:1.1rem}
+}
+
+/* === layout wrapper: centra y organiza texto + tarjeta lado a lado === */
+.recuperar-wrapper{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  padding:8px 20px;
+}
+
+/* columna izquierda: título/explicación */
+.recuperar-left{
+  flex:1 1 420px;
+  min-width:220px;
+  max-width:520px;
+  text-align:right;
+  padding-right:12px;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+/* tarjeta / formulario a la derecha */
+form#form-olvido, .recuperar-card{
+  flex:0 0 420px;
+  margin:0;
+}
+
+/* ajuste para pantallas pequeñas: apilar verticalmente */
+@media (max-width:768px){
+  .recuperar-wrapper{flex-direction:column; align-items:center; text-align:center; gap:14px}
+  .recuperar-left{max-width:100%; text-align:center; padding-right:0}
+  form#form-olvido, .recuperar-card{width:100%; max-width:420px}
+}
