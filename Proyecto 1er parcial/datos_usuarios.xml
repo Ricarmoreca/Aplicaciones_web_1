@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+  <usuario>
+    <id>1</id>
+    <nombre>Juan Pérez</nombre>
+    <email>juan.perez@uleam.edu.ec</email>
+    <rol>investigador</rol>
+    <departamento>Ingeniería en Sistemas</departamento>
+    <estado>activo</estado>
+  </usuario>
+  <usuario>
+    <id>2</id>
+    <nombre>María González</nombre>
+    <email>maria.gonzalez@uleam.edu.ec</email>
+    <rol>investigador</rol>
+    <departamento>Ciencias Ambientales</departamento>
+    <estado>activo</estado>
+  </usuario>
+  <usuario>
+    <id>3</id>
+    <nombre>Carlos López</nombre>
+    <email>carlos.lopez@uleam.edu.ec</email>
+    <rol>profesor</rol>
+    <departamento>Pedagogía</departamento>
+    <estado>activo</estado>
+  </usuario>
+</usuarios>

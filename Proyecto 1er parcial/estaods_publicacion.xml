@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estados>
+  <estado>
+    <codigo>pendiente</codigo>
+    <descripcion>Publicación en revisión</descripcion>
+    <color>#FFA500</color>
+  </estado>
+  <estado>
+    <codigo>aprobado</codigo>
+    <descripcion>Publicación aprobada</descripcion>
+    <color>#008000</color>
+  </estado>
+  <estado>
+    <codigo>rechazado</codigo>
+    <descripcion>Publicación rechazada</descripcion>
+    <color>#FF0000</color>
+  </estado>
+  <estado>
+    <codigo>borrador</codigo>
+    <descripcion>Publicación en borrador</descripcion>
+    <color>#808080</color>
+  </estado>
+</estados>

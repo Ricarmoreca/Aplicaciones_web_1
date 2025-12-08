@@ -1,0 +1,31 @@
+{
+  "publicaciones": [
+    {
+      "id": 1,
+      "titulo": "Investigación en Inteligencia Artificial",
+      "autor": "Dr. Juan Pérez",
+      "fecha": "2024-12-01",
+      "resumen": "Un estudio completo sobre las aplicaciones de IA en la educación superior",
+      "estado": "aprobado",
+      "categoria": "Tecnología"
+    },
+    {
+      "id": 2,
+      "titulo": "Análisis de Sostenibilidad Ambiental",
+      "autor": "Dra. María González",
+      "fecha": "2024-11-15",
+      "resumen": "Evaluación de prácticas sostenibles en instituciones educativas",
+      "estado": "pendiente",
+      "categoria": "Medio Ambiente"
+    },
+    {
+      "id": 3,
+      "titulo": "Metodologías de Enseñanza Digital",
+      "autor": "Prof. Carlos López",
+      "fecha": "2024-10-20",
+      "resumen": "Implementación de herramientas digitales en el aula",
+      "estado": "aprobado",
+      "categoria": "Educación"
+    }
+  ]
+}

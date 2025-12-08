@@ -40,9 +40,36 @@
   var noData = document.getElementById('noData');
   var btnLogout = document.getElementById('logout');
 
-  function loadPublications(){ 
-    return JSON.parse(localStorage.getItem('publications') || '[]'); 
+  // 📥 Cargar publicaciones desde JSON + localStorage
+  async function loadPublications(){ 
+    // Primero intenta cargar del localStorage
+    var fromStorage = JSON.parse(localStorage.getItem('publications') || '[]');
+    
+    // Luego carga datos del JSON local
+    try {
+      var response = await fetch('datos_publicaciones.json');
+      var jsonData = await response.json();
+      
+      // Convierte campos JSON al formato esperado
+      var fromJSON = jsonData.publicaciones.map(p => ({
+        id: p.id,
+        title: p.titulo,
+        authors: p.autor,
+        status: p.estado === 'aprobado' ? 'aprobada' : p.estado === 'pendiente' ? 'en_revision' : p.estado,
+        date: p.fecha,
+        abstract: p.resumen,
+        type: p.categoria,
+        createdByName: p.autor
+      }));
+      
+      // Combina ambas fuentes (localStorage + JSON)
+      return [...fromJSON, ...fromStorage];
+    } catch(e) {
+      console.log('No se pudo cargar datos_publicaciones.json, usando solo localStorage');
+      return fromStorage;
+    }
   }
+
   function savePublications(pubs){ 
     localStorage.setItem('publications', JSON.stringify(pubs));
   }
@@ -50,8 +77,8 @@
     return JSON.parse(localStorage.getItem('session') || 'null'); 
   }
 
-  function render(){
-    var pubs = loadPublications();
+  async function render(){
+    var pubs = await loadPublications();
     var session = loadSession();
 
     var total = pubs.length;
@@ -72,18 +99,14 @@
       }
     }
 
-    // 🧩 Filtro de publicaciones por rol
     var role = (session?.rol || '').toLowerCase();
     var userEmail = (session?.email || '').toLowerCase();
 
     if (role === 'docente' || role === 'estudiante') {
-      // Docente y estudiante: solo publicaciones aprobadas
       pubs = pubs.filter(p => (p.status || '').toLowerCase() === 'aprobada');
     } else if (role === 'administrador' || role === 'admin') {
-      // Admin: ve todo
       pubs = pubs;
     } else {
-      // Otros roles o sin rol válido: no ven nada
       pubs = [];
     }
 
@@ -99,9 +122,6 @@
       var pdfLink = pub.pdfData ? `<a href="${escapeHTML(pub.pdfData)}" download="${escapeHTML((pub.title||'publicacion').replace(/[^a-z0-9\-]/gi,'_'))}.pdf">PDF</a>` : '';
       var createdBy = escapeHTML(pub.createdByName || pub.createdBy || 'Anónimo');
 
-      // Mostrar botón eliminar solo si:
-      // - el rol es admin, o
-      // - el docente actual creó la publicación
       var canDelete = false;
       if (role === 'administrador' || role === 'admin') canDelete = true;
       else if (role === 'docente' && pub.createdBy?.toLowerCase() === userEmail) canDelete = true;
@@ -122,6 +142,7 @@
             <strong>Estado:</strong> ${escapeHTML(pub.status || '')} • 
             <strong>Creado por:</strong> ${createdBy}
           </div>
+          <p class="resumen">${escapeHTML(pub.abstract || '')}</p>
           <div class="links">
             ${doiLink}${(doiLink && pdfLink ? ' ' : '')}${pdfLink}
             ${deleteBtn}
@@ -129,7 +150,6 @@
         </article>`;
     }).join('');
 
-    // Asignar eventos de eliminar
     document.querySelectorAll('.btnEliminar').forEach(btn => {
       btn.addEventListener('click', function(){
         var id = this.dataset.id;
@@ -158,7 +178,6 @@
   window.addEventListener('storage', function(e){
     if (e.key === 'publications' || e.key === 'session' || e.key === null) render();
   });
-  window.addEventListener('resize', render);
 })();
 </script>
 </body>

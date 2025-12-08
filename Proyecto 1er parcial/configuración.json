@@ -1,0 +1,19 @@
+{
+  "aplicacion": {
+    "nombre": "Gestor de Publicaciones Científicas ULEAM",
+    "version": "1.0.0",
+    "descripcion": "Sistema de gestión de publicaciones científicas"
+  },
+  "configuracion": {
+    "idioma": "es",
+    "zona_horaria": "America/Guayaquil",
+    "permitir_registros": true,
+    "validar_correo": true
+  },
+  "limites": {
+    "caracteres_titulo": 200,
+    "caracteres_resumen": 1000,
+    "tamaño_maximo_archivo": 5242880,
+    "publicaciones_por_pagina": 10
+  }
+}
