@@ -1,0 +1,258 @@
+/* ===== RESET PARA DASHBOARD ===== */
+.contenedor,
+.contenedor * {
+  all: revert;
+}
+
+.contenedor {
+  box-sizing: border-box;
+}
+
+:root {
+  --uleam-red: #ef3037;
+  --uleam-dark: #2c2a2a;
+  --uleam-light: #f5f5f5;
+  --uleam-gold: #F0C419;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+}
+
+/* ===== DASHBOARD LAYOUT ===== */
+
+/* Contenedor principal FLEX - MÁS FUERTE */
+.contenedor {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  max-width: 1400px;
+  margin: 20px auto !important;
+  padding: 20px !important;
+  min-height: auto;
+  align-items: flex-start !important;
+}
+
+/* ===== SIDEBAR COLUMNA IZQUIERDA ===== */
+
+nav.Menú_lateral {
+  width: 280px !important;
+  min-width: 280px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  background: linear-gradient(135deg, #ef3037 0%, #d62828 100%) !important;
+  color: #fff !important;
+  padding: 24px 20px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(239, 48, 55, 0.15) !important;
+  height: fit-content !important;
+  position: sticky !important;
+  top: 20px !important;
+  display: block !important;
+}
+
+nav.Menú_lateral h2 {
+  margin: 0 0 24px 0 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--uleam-gold) !important;
+  letter-spacing: 0.5px !important;
+  display: block !important;
+}
+
+nav.Menú_lateral a {
+  color: #fff !important;
+  text-decoration: none !important;
+  display: block !important;
+  padding: 12px 16px !important;
+  margin-bottom: 8px !important;
+  margin: 0 0 8px 0 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+  border-left: 3px solid transparent !important;
+}
+
+nav.Menú_lateral a:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-left-color: var(--uleam-gold) !important;
+  transform: translateX(4px) !important;
+}
+
+/* ===== COLUMNA DERECHA (FLEX CONTAINER) ===== */
+
+/* Wrapper para agrupar resumen y crear_publicacion */
+.resumen,
+.crear_publicacion {
+  flex: 1 !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* ===== TARJETAS DE RESUMEN ===== */
+
+section.resumen {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 20px !important;
+  margin-bottom: 30px !important;
+}
+
+.tarjeta {
+  background: var(--card-bg) !important;
+  border: 2px solid var(--border) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+.tarjeta:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-4px) !important;
+  border-color: var(--uleam-red) !important;
+}
+
+.tarjeta h3 {
+  margin: 0 0 16px 0 !important;
+  color: var(--uleam-red) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  display: block !important;
+}
+
+.tarjeta p {
+  margin: 0 !important;
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  display: block !important;
+}
+
+/* ===== SECCIÓN CREAR PUBLICACIÓN ===== */
+
+section.crear_publicacion {
+  margin-top: 0 !important;
+  padding: 0 !important;
+}
+
+.boton_crear {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.btn-crear {
+  display: inline-block !important;
+  padding: 14px 28px !important;
+  background: linear-gradient(135deg, #F0C419 0%, #f0b300 100%) !important;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(240, 196, 25, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-crear:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(240, 196, 25, 0.4) !important;
+}
+
+.btn-crear:active {
+  transform: translateY(0) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .contenedor {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  nav.Menú_lateral {
+    width: 100% !important;
+    min-width: 100% !important;
+    position: relative !important;
+    top: 0 !important;
+    padding: 16px 20px !important;
+  }
+
+  nav.Menú_lateral h2 {
+    margin: 0 0 12px 0 !important;
+    font-size: 20px !important;
+  }
+
+  nav.Menú_lateral a {
+    display: inline-block !important;
+    margin: 0 8px 0 0 !important;
+    padding: 8px 12px !important;
+  }
+
+  section.resumen {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 15px !important;
+  }
+
+  .tarjeta {
+    padding: 16px !important;
+  }
+
+  .tarjeta h3 {
+    font-size: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .tarjeta p {
+    font-size: 32px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 12px !important;
+    margin: 12px auto !important;
+  }
+
+  nav.Menú_lateral {
+    padding: 12px !important;
+    gap: 12px !important;
+  }
+
+  nav.Menú_lateral h2 {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+    font-size: 18px !important;
+  }
+
+  nav.Menú_lateral a {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+  }
+
+  section.resumen {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .tarjeta {
+    padding: 14px !important;
+  }
+
+  .tarjeta p {
+    font-size: 28px !important;
+  }
+
+  .btn-crear {
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+}

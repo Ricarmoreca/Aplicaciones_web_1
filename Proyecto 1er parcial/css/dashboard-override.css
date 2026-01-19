@@ -1,0 +1,301 @@
+/* ===== OVERRIDE ABSOLUTO PARA DASHBOARD ===== */
+
+/* Resetear body solo para dashboard */
+body {
+  display: block !important;
+  flex-direction: initial !important;
+  align-items: initial !important;
+  justify-content: initial !important;
+  min-height: auto !important;
+  background: #f8f9fa !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+html {
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Resetear el contenedor de la app */
+#app {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Contenedor principal - ESTRUCTURA FLEX */
+.contenedor {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  max-width: 1400px !important;
+  margin: 20px auto !important;
+  padding: 20px !important;
+  width: calc(100% - 40px) !important;
+  box-sizing: border-box !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+/* Sidebar a la IZQUIERDA */
+nav.Menú_lateral {
+  display: block !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  order: 1 !important;
+  background: linear-gradient(135deg, #ef3037 0%, #d62828 100%) !important;
+  color: #fff !important;
+  padding: 24px 20px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(239, 48, 55, 0.15) !important;
+  height: fit-content !important;
+  position: sticky !important;
+  top: 20px !important;
+  margin: 0 !important;
+}
+
+/* Encabezado sidebar */
+nav.Menú_lateral h2 {
+  display: block !important;
+  margin: 0 0 24px 0 !important;
+  padding: 0 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #F0C419 !important;
+  letter-spacing: 0.5px !important;
+  width: 100% !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* Links del sidebar */
+nav.Menú_lateral a {
+  display: block !important;
+  width: 100% !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  padding: 12px 16px !important;
+  margin: 0 0 8px 0 !important;
+  border-radius: 8px !important;
+  border-left: 3px solid transparent !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-left: 3px solid transparent !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+nav.Menú_lateral a:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-left-color: #F0C419 !important;
+  transform: translateX(4px) !important;
+}
+
+nav.Menú_lateral a:active,
+nav.Menú_lateral a.router-link-active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-left-color: #F0C419 !important;
+}
+
+/* Contenido DERECHO */
+section.resumen,
+section.crear_publicacion {
+  flex: 1 !important;
+  order: 2 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Grid de tarjetas */
+section.resumen {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 20px !important;
+  margin-bottom: 30px !important;
+  width: 100% !important;
+}
+
+/* Tarjetas de estadísticas */
+.tarjeta {
+  background: #ffffff !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: all 0.3s ease !important;
+  margin: 0 !important;
+}
+
+.tarjeta:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-4px) !important;
+  border-color: #ef3037 !important;
+}
+
+.tarjeta h3 {
+  display: block !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  color: #ef3037 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  width: 100% !important;
+}
+
+.tarjeta p {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  color: #1f2933 !important;
+  width: 100% !important;
+}
+
+/* Botón crear publicación */
+.boton_crear {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.btn-crear {
+  display: inline-block !important;
+  padding: 14px 28px !important;
+  background: linear-gradient(135deg, #F0C419 0%, #f0b300 100%) !important;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  border: none !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(240, 196, 25, 0.3) !important;
+  transition: all 0.3s ease !important;
+  width: auto !important;
+}
+
+.btn-crear:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(240, 196, 25, 0.4) !important;
+}
+
+.btn-crear:active {
+  transform: translateY(0) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .contenedor {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  nav.Menú_lateral {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+    padding: 16px 20px !important;
+  }
+
+  nav.Menú_lateral h2 {
+    margin: 0 !important;
+    font-size: 20px !important;
+  }
+
+  nav.Menú_lateral a {
+    display: inline-block !important;
+    margin: 0 8px 0 0 !important;
+    padding: 8px 12px !important;
+    width: auto !important;
+    font-size: 13px !important;
+  }
+
+  section.resumen {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 15px !important;
+  }
+
+  .tarjeta {
+    padding: 16px !important;
+  }
+
+  .tarjeta h3 {
+    font-size: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .tarjeta p {
+    font-size: 32px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 12px !important;
+    margin: 12px auto !important;
+    width: calc(100% - 24px) !important;
+  }
+
+  nav.Menú_lateral {
+    padding: 12px !important;
+    flex-wrap: wrap !important;
+  }
+
+  nav.Menú_lateral h2 {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+    font-size: 18px !important;
+  }
+
+  nav.Menú_lateral a {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+  }
+
+  section.resumen {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .tarjeta {
+    padding: 14px !important;
+  }
+
+  .tarjeta h3 {
+    font-size: 12px !important;
+  }
+
+  .tarjeta p {
+    font-size: 28px !important;
+  }
+
+  .btn-crear {
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+}
