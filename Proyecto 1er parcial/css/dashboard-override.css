@@ -1,5 +1,3 @@
-/* ===== OVERRIDE ABSOLUTO PARA DASHBOARD ===== */
-
 /* Resetear body solo para dashboard */
 body {
   display: block !important;
